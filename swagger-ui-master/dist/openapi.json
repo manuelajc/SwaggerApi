@@ -1,0 +1,1116 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SISGED API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://{{url}}ingresar_radicado_pqrs"
+    },
+    {
+      "url": "http://{{url}}ingresar_radicado_pqrs_anonimo"
+    },
+    {
+      "url": "http://{{url}}cargar_archivo"
+    },
+    {
+      "url": "http://{{url}}radicado"
+    },
+    {
+      "url": "http://{{url}}get_info_radicado"
+    },
+    {
+      "url": "http://{{url}}ingresar_radicado"
+    },
+    {
+      "url": "http://{{url}}ingresar_radicado_saliente"
+    },
+    {
+      "url": "http://{{url}}archivar_radicado"
+    },
+    {
+      "url": "http://{{url}}anular_radicado"
+    },
+    {
+      "url": "http://{{url}}get_entrega_correos"
+    },
+    {
+      "url": "http://{{url}}get_radicado_guia"
+    },
+    {
+      "url": "http://{{url}}check_connection"
+    },
+    {
+      "url": "http://{{url}}ciudad"
+    },
+    {
+      "url": "http://{{url}}tipos_identificacion"
+    },
+    {
+      "url": "http://{{url}}tipo_persona"
+    },
+    {
+      "url": "http://{{url}}get_medio_recepcion"
+    },
+    {
+      "url": "http://{{url}}get_medio_respuesta"
+    },
+    {
+      "url": "http://{{url}}get_tipos_documentales"
+    },
+    {
+      "url": "http://{{url}}get_dependencias"
+    },
+    {
+      "url": "http://{{url}}radicado_web"
+    },
+    {
+      "url": "http://{{url}}ingresar_radicado_web"
+    },
+    {
+      "url": "http://{{url}}get_info_radicado_web"
+    },
+    {
+      "url": "http://{{url}}cargar_archivo_web"
+    },
+    {
+      "url": "http://{{url}}persona"
+    },
+    {
+      "url": "http://{{url}}ingresar_direccion"
+    },
+    {
+      "url": "http://{{url}}ingresar_persona"
+    },
+    {
+      "url": "http://{{url}}consultar_comunicado"
+    },
+    {
+      "url": "http://{{url}}ingresar_comunicado"
+    },
+    {
+      "url": "http://{{url}}cargar_comunicado"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "PQRS"
+    },
+    {
+      "name": "RADICADO"
+    },
+    {
+      "name": "RADICADO > Correspondencia Entrante"
+    },
+    {
+      "name": "RADICADO > Correspondencia Saliente"
+    },
+    {
+      "name": "COMUNES"
+    },
+    {
+      "name": "RADICADO WEB"
+    },
+    {
+      "name": "PERSONAS"
+    },
+    {
+      "name": "COMUNICADOS"
+    }
+  ],
+  "paths": {
+    "/cargar_comunicado": {
+      "post": {
+        "tags": [
+          "COMUNICADOS"
+        ],
+        "summary": "Cargar Archivo Comunicado",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_comunicado": {
+                    "type": "integer",
+                    "description": "Id del comunicado al cual se le cargara el archivo",
+                    "example": "895"
+                  },
+                  "archivo": {
+                    "type": "string",
+                    "description": "Nombre del archivo a cargar",
+                    "example": "test.pdf"
+                  },
+                  "file": {
+                    "type": "string",
+                    "description": "String del archivo codificado en Base64"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/ingresar_comunicado": {
+      "post": {
+        "tags": [
+          "COMUNICADOS"
+        ],
+        "summary": "Ingresar comunicado",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "asunto": {
+                    "type": "string",
+                    "description": "asunto del comunicado",
+                    "example": "Asunto de prueba"
+                  },
+                  "tipo": {
+                    "type": "integer",
+                    "description": "Tipo de Comunicado  consultar  / Consultar tipo de Comunicados",
+                    "example": "2"
+                  },
+                  "nivel": {
+                    "type": "integer",
+                    "description": "Nivel de vista del comunicado General-Directivo-Dependencia-Privado",
+                    "example": "3"
+                  },
+                  "id_usuario": {
+                    "type": "integer",
+                    "description": "Id del usuario a quien se le asignara el comunicado.",
+                    "example": "15"
+                  },
+                  "masivo": {
+                    "type": "integer",
+                    "description": "Cantidad en número de consecutivos 1-x",
+                    "example": "1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Consultar_comunicado": {
+      "post": {
+        "tags": [
+          "COMUNICADOS"
+        ],
+        "summary": "Consulta de Comunicados",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "número del comunicado",
+                    "example": "5"
+                  },
+                  "tipo": {
+                    "type": "integer",
+                    "description": "Tipo de Comunicado  consultar  / Consultar tipo de Comunicados",
+                    "example": "1"
+                  },
+                  "year": {
+                    "type": "integer",
+                    "description": "Año del comunicado",
+                    "example": "2022"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/consultar_persona": {
+      "post": {
+        "tags": [
+          "PERSONAS"
+        ],
+        "summary": "Consulta de una Persona",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identificacion": {
+                    "type": "integer",
+                    "description": "Numero de identificacion de la persona",
+                    "example": "8157599"
+                  },
+                  "tipo_identificacion": {
+                    "type": "integer",
+                    "description": "Tipo de identificacion  consultar  Comunes / Consultar tipo de identificacion",
+                    "example": "2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/agregar_direccion": {
+      "post": {
+        "tags": [
+          "PERSONAS"
+        ],
+        "summary": "Agregar Dirección",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_personas": {
+                    "type": "integer",
+                    "description": "Id de la persona a la cual se le agregara la nueva direccion",
+                    "example": "134"
+                  },
+                  "personas_email": {
+                    "type": "string",
+                    "description": "Email de la nueva direccion",
+                    "example": "email2@gmail.com"
+                  },
+                  "personas_email_alternativo": {
+                    "type": "string",
+                    "description": "Email alternativo",
+                    "example": "otroemail@gmail.com"
+                  },
+                  "personas_telefono": {
+                    "type": "integer",
+                    "description": "telefono"
+                  },
+                  "personas_celular": {
+                    "type": "integer",
+                    "description": "celular"
+                  },
+                  "personas_zip": {
+                    "type": "integer",
+                    "description": "ZIP"
+                  },
+                  "personas_direccion": {
+                    "type": "integer",
+                    "description": "Dirección",
+                    "example": "calle 402"
+                  },
+                  "id_ciudad": {
+                    "type": "integer",
+                    "description": "Id de la ciudad consultar Comunes / Consultar ciudaddes",
+                    "example": "5001"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/agregar_persona": {
+      "post": {
+        "tags": [
+          "PERSONAS"
+        ],
+        "summary": "Agregar una Persona",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "personas_nombre": {
+                    "type": "string",
+                    "description": "Nombres  o razon social de la persona",
+                    "example": "Lupita"
+                  },
+                  "personas_apellido": {
+                    "type": "string",
+                    "description": "Apellidos o siglas  de la persona",
+                    "example": "Perez Lopez"
+                  },
+                  "id_tipo_identificacion": {
+                    "type": "string",
+                    "description": "Id tipo de identificacion consulatar Comunes / Contar tipo identificacion",
+                    "example": "2"
+                  },
+                  "personas_identificacion": {
+                    "type": "integer",
+                    "description": "numero de identificacion de la persona",
+                    "example": "4309573590"
+                  },
+                  "personas_email": {
+                    "type": "string",
+                    "description": "email de la persona",
+                    "example": "lupitap@gmail.com"
+                  },
+                  "personas_email_alternativo": {
+                    "type": "integer",
+                    "description": "email alternativo de la persona",
+                    "example": "lupita2@gmail.com"
+                  },
+                  "personas_telefono": {
+                    "type": "integer",
+                    "description": "telefono",
+                    "example": "2045567"
+                  },
+                  "personas_celular": {
+                    "type": "integer",
+                    "description": "Celular",
+                    "example": "5406782346"
+                  },
+                  "personas_direccion": {
+                    "type": "string",
+                    "description": "Dirección",
+                    "example": "Calle 341"
+                  },
+                  "personas_barrio": {
+                    "type": "string",
+                    "description": "Barrio",
+                    "example": "La Aldea"
+                  },
+                  "personas_zip": {
+                    "type": "integer",
+                    "description": "ZIP",
+                    "example": "050013"
+                  },
+                  "id_ciudad": {
+                    "type": "integer",
+                    "description": "Id de la ciudad consultar Comunes / Consultar ciudaddes",
+                    "example": "5001"
+                  },
+                  "id_tipo_persona": {
+                    "type": "integer",
+                    "description": "id del tipo de persona consultar Comunes / Consultar tipo de persona",
+                    "example": "2"
+                  },
+                  "personas_sigla": {
+                    "type": "string",
+                    "description": "Siglas en caso de persona juridica"
+                  },
+                  "personas_representante": {
+                    "type": "string",
+                    "description": "Represetnante legal en caso de persona juridica"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/agregar_anonimo": {
+      "post": {
+        "tags": [
+          "PERSONAS"
+        ],
+        "summary": "Agregar un Anónimo",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "personas_nombre": {
+                    "type": "string",
+                    "description": "Nombres  o razon social de la persona",
+                    "example": "Lupita"
+                  },
+                  "personas_apellido": {
+                    "type": "string",
+                    "description": "Apellidos o siglas  de la persona",
+                    "example": "Perez Lopez"
+                  },
+                  "id_tipo_identificacion": {
+                    "type": "string",
+                    "description": "Id tipo de identificacion consulatar Comunes / Contar tipo identificacion",
+                    "example": "2"
+                  },
+                  "personas_identificacion": {
+                    "type": "integer",
+                    "description": "numero de identificacion de la persona",
+                    "example": "4309573590"
+                  },
+                  "personas_email": {
+                    "type": "string",
+                    "description": "email de la persona",
+                    "example": "lupitap@gmail.com"
+                  },
+                  "personas_email_alternativo": {
+                    "type": "integer",
+                    "description": "email alternativo de la persona",
+                    "example": "lupita2@gmail.com"
+                  },
+                  "personas_telefono": {
+                    "type": "integer",
+                    "description": "telefono",
+                    "example": "2045567"
+                  },
+                  "personas_celular": {
+                    "type": "integer",
+                    "description": "Celular",
+                    "example": "5406782346"
+                  },
+                  "personas_direccion": {
+                    "type": "string",
+                    "description": "Dirección",
+                    "example": "Calle 341"
+                  },
+                  "personas_barrio": {
+                    "type": "string",
+                    "description": "Barrio",
+                    "example": "La Aldea"
+                  },
+                  "personas_zip": {
+                    "type": "integer",
+                    "description": "ZIP",
+                    "example": "050013"
+                  },
+                  "id_ciudad": {
+                    "type": "integer",
+                    "description": "Id de la ciudad consultar Comunes / Consultar ciudaddes",
+                    "example": "5001"
+                  },
+                  "id_tipo_persona": {
+                    "type": "integer",
+                    "description": "id del tipo de persona consultar Comunes / Consultar tipo de persona",
+                    "example": "2"
+                  },
+                  "personas_sigla": {
+                    "type": "string",
+                    "description": "Siglas en caso de persona juridica"
+                  },
+                  "personas_representante": {
+                    "type": "string",
+                    "description": "Represetnante legal en caso de persona juridica"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/editar_anonimo": {
+      "post": {
+        "tags": [
+          "PERSONAS"
+        ],
+        "summary": "Editar un anónimo",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "personas_nombre": {
+                    "type": "string",
+                    "description": "Nombres  o razon social de la persona",
+                    "example": "Lupita"
+                  },
+                  "personas_apellido": {
+                    "type": "string",
+                    "description": "Apellidos o siglas  de la persona",
+                    "example": "Perez Lopez"
+                  },
+                  "id_tipo_identificacion": {
+                    "type": "string",
+                    "description": "Id tipo de identificacion consulatar Comunes / Contar tipo identificacion",
+                    "example": "2"
+                  },
+                  "personas_identificacion": {
+                    "type": "integer",
+                    "description": "numero de identificacion de la persona",
+                    "example": "4309573590"
+                  },
+                  "personas_email": {
+                    "type": "string",
+                    "description": "email de la persona",
+                    "example": "lupitap@gmail.com"
+                  },
+                  "personas_email_alternativo": {
+                    "type": "integer",
+                    "description": "email alternativo de la persona",
+                    "example": "lupita2@gmail.com"
+                  },
+                  "personas_telefono": {
+                    "type": "integer",
+                    "description": "telefono",
+                    "example": "2045567"
+                  },
+                  "personas_celular": {
+                    "type": "integer",
+                    "description": "Celular",
+                    "example": "5406782346"
+                  },
+                  "personas_direccion": {
+                    "type": "string",
+                    "description": "Dirección",
+                    "example": "Calle 341"
+                  },
+                  "personas_barrio": {
+                    "type": "string",
+                    "description": "Barrio",
+                    "example": "La Aldea"
+                  },
+                  "personas_zip": {
+                    "type": "integer",
+                    "description": "ZIP",
+                    "example": "050013"
+                  },
+                  "id_ciudad": {
+                    "type": "integer",
+                    "description": "Id de la ciudad consultar Comunes / Consultar ciudaddes",
+                    "example": "5001"
+                  },
+                  "id_tipo_persona": {
+                    "type": "integer",
+                    "description": "id del tipo de persona consultar Comunes / Consultar tipo de persona",
+                    "example": "2"
+                  },
+                  "personas_sigla": {
+                    "type": "string",
+                    "description": "Siglas en caso de persona juridica"
+                  },
+                  "personas_representante": {
+                    "type": "string",
+                    "description": "Represetnante legal en caso de persona juridica"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Consultar_radicado_web": {
+      "post": {
+        "tags": [
+          "RADICADO WEB"
+        ],
+        "summary": "Consultar Radicado Web",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "radicado": {
+                    "type": "integer",
+                    "description": "número del radicado",
+                    "example": "2207127210"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Cargar_radicado": {
+      "post": {
+        "tags": [
+          "RADICADO WEB"
+        ],
+        "summary": "Cargar Radicado Web",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "asuntos": {
+                    "type": "string",
+                    "description": "asunto del radicado",
+                    "example": "asunto"
+                  },
+                  "id_tipos_documentales": {
+                    "type": "integer",
+                    "description": "Verificar servicio Comunes / Consultar tipo solicitud",
+                    "example": "2"
+                  },
+                  "id_medio_respuesta": {
+                    "type": "integer",
+                    "description": "Verificar servicio Comunes / Consultar medio respuesta",
+                    "example": "1"
+                  },
+                  "id_medio_recepcion": {
+                    "type": "integer",
+                    "description": "Verificar servicio Comunes / Consultar medio recepcion",
+                    "example": "1"
+                  },
+                  "id_personas": {
+                    "type": "integer",
+                    "description": "Verificar servicio Personas / Consultar Persona",
+                    "example": "6"
+                  },
+                  "id_direcciones": {
+                    "type": "string",
+                    "description": "Si la persona tiene una direccion alternativa , consultar Personas / Direcciones Alternativas"
+                  },
+                  "file": {
+                    "type": "integer",
+                    "description": "Archivo anexo a la radicacion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Obtener_radicado": {
+      "post": {
+        "tags": [
+          "RADICADO WEB"
+        ],
+        "summary": "Obetner info Radicado Web",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "radicado": {
+                    "type": "integer",
+                    "description": "número de radicado",
+                    "example": "2207127210"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Cargar_archivo": {
+      "post": {
+        "tags": [
+          "RADICADO WEB"
+        ],
+        "summary": "Cargar Archivo Radicado Web",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "radicado": {
+                    "type": "integer",
+                    "description": "número del radicado",
+                    "example": "2207127210"
+                  },
+                  "file": {
+                    "type": "integer",
+                    "description": "archivo anexo a la radicación"
+                  },
+                  "descripcion": {
+                    "type": "integer",
+                    "description": "documento anexo",
+                    "example": "documento"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Cargar_archivo_radicado": {
+      "post": {
+        "tags": [
+          "RADICADO"
+        ],
+        "summary": "Cargar un Archivo Radicado",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "radicado": {
+                    "type": "integer",
+                    "description": "Numero del radicado al que se le cargara el archivo",
+                    "example": "22071299900070"
+                  },
+                  "file": {
+                    "type": "integer",
+                    "description": "archivo en BASE64"
+                  },
+                  "descripcion": {
+                    "type": "integer",
+                    "description": "Nombre o descripcion del anexo",
+                    "example": "documento anexo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Consultar_radicado": {
+      "post": {
+        "tags": [
+          "RADICADO"
+        ],
+        "summary": "Consultar un Radicado",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "radicado": {
+                    "type": "integer",
+                    "description": "Numero del radicado a consultar",
+                    "example": "22071299900070"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Archivar_radicado": {
+      "post": {
+        "tags": [
+          "RADICADO"
+        ],
+        "summary": "Archivar un Radicado",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "radicado": {
+                    "type": "integer",
+                    "description": "Numero del radicado a consultar",
+                    "example": "22071299900070"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Anular_radicado": {
+      "post": {
+        "tags": [
+          "RADICADO"
+        ],
+        "summary": "Anular un Radicado",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "radicado": {
+                    "type": "integer",
+                    "description": "Numero del radicado a anular",
+                    "example": "22071299900070"
+                  },
+                  "razon": {
+                    "type": "string",
+                    "description": "Razon y/o observacion para anular el radicado",
+                    "example": "22071299900070"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/Obtener_info": {
+      "post": {
+        "tags": [
+          "RADICADO"
+        ],
+        "summary": "Obtener info de un radicado",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "radicado": {
+                    "type": "integer",
+                    "description": "Numero del radicado a consultar",
+                    "example": "22071299900070"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "COMUNICADOS"
+        ],
+        "summary": "Consultar Tipos de Comunicados",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
